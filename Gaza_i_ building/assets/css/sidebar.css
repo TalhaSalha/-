@@ -1,0 +1,202 @@
+
+:root {
+    --sidebar-width: 280px;
+    --sidebar-bg: rgba(15, 23, 42, 0.95);
+    --sidebar-border: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    z-index: 1050;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid var(--sidebar-border);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) transparent;
+}
+
+.content {
+    width: auto;
+    min-height: 100vh;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Brand Section */
+.sidebar-brand {
+    border-bottom: 1px solid var(--sidebar-border);
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-brand::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: radial-gradient(circle, var(--primary-color) 0%, transparent 100%);
+    opacity: 0.5;
+}
+
+.sidebar-logo-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Profile Card */
+.glass-profile-card {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8));
+    border-radius: 16px;
+    border: 1px solid var(--sidebar-border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-profile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-color: rgba(212, 175, 55, 0.2);
+}
+
+.profile-img-container {
+    width: 45px;
+    height: 45px;
+    background: var(--primary-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(15, 23, 42, 1);
+}
+
+/* Navigation Links */
+.nav-item.nav-link {
+    color: var(--text-muted) !important;
+    padding: 12px 20px;
+    border-radius: 12px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border-right: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-icon {
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    margin-left: 12px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.nav-text {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Hover State */
+.nav-item.nav-link:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff !important;
+    transform: translateX(-5px);
+}
+
+.nav-item.nav-link:hover .nav-icon {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* Active State */
+.nav-item.nav-link.active {
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.15) 0%, transparent 100%);
+    color: var(--primary-color) !important;
+    border-right-color: var(--primary-color);
+}
+
+.nav-item.nav-link.active .nav-icon {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* Nav Header */
+.nav-header {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    opacity: 0.6;
+    margin-top: 1.5rem;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    border-top: 1px solid var(--sidebar-border);
+    background: rgba(15, 23, 42, 0.5);
+}
+
+/* Responsive Logic */
+@media (max-width: 991.98px) {
+    .sidebar {
+        margin-right: -280px; /* Hidden by default on mobile */
+    }
+    
+    .sidebar.open {
+        margin-right: 0; /* Shown when open on mobile */
+        box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    }
+    
+    .content {
+        margin-right: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .sidebar {
+        margin-right: 0; /* Visible by default on desktop */
+    }
+
+    .content {
+        margin-right: 280px; /* Space for sidebar */
+    }
+
+    .sidebar.open {
+        margin-right: -280px; /* Hidden when toggled on desktop */
+    }
+
+    .content.open {
+        margin-right: 0; /* Full width when sidebar hidden */
+    }
+}
